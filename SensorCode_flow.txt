@@ -17,7 +17,7 @@ for each position:
 				[ send updated status to server ]
 				// (don’t need to check other faces,
 				//	since found an object already)
-				return	// restarts Arduino loop
+			return	// restarts Arduino loop
 
 // (If reached here, did not leave loop above early)
 if status != not taken (aka status has just changed):
