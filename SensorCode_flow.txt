@@ -1,0 +1,25 @@
+... wait a specified amount of time before checking surroundings ... 
+
+for each position:
+	for each sensor:
+		clear the trigger pin
+		send the pulse
+		time the reply
+		compute the distance based on the reply time
+		if the distance is 0 or distance > MAX_DIST:
+			print “out of range (on this face)!”
+			// (Keep checking other faces)
+		else:
+			print distance
+			set status to taken
+			if status != taken (aka status has just changed):
+				set status to taken
+				[ send updated status to server ]
+				// (don’t need to check other faces,
+				//	since found an object already)
+				return	// restarts Arduino loop
+
+// (If reached here, did not leave loop above early)
+if status != not taken (aka status has just changed):
+	set status to not taken
+	[ send updated status to server ]
