@@ -37,8 +37,8 @@ const float CLEAR_MICRO = 2;                    // In microseconds; time needed 
 const float TRIGGER_MICRO = 10;                 // In microseconds; time needed for trigger pin to be on HIGH to get accurate readings
 
 /* Constants for WiFi communication */
-const char NETWORK_SSID[] = "Virus Detected";   // Network SSID the Arduino should connect to
-const char NETWORK_PASS[] = "magbayadka";       // Password of above network
+const char NETWORK_SSID[] = "replace-with-ssid";   // Network SSID the Arduino should connect to
+const char NETWORK_PASS[] = "replace-with-pass";       // Password of above network
 
 const char SERVER_URL[] = "192.168.8.102";         // URL/ip address of server/website to connect to
 const int SERVER_PORT = 8000;                   // Port of server to connect to
