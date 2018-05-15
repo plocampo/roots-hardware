@@ -49,7 +49,7 @@ const int SCAN_MILLI = 0.5 * 1000;              // In milliseconds; time interva
 const int WAIT_SECS = 2;                        // In seconds; time between Arduino starting a full cycle + send status of checks
 
 const float SOUND_SPEED = 340.0;                // In m/s
-const float TABLE_RAD = 1.0 / 2;                // In m; radius of table (assume that all sides are equidistant,
+const float TABLE_RAD = 1.0 / 20;                // In m; radius of table (assume that all sides are equidistant,
                                                 //  and that sensor is placed at middle of table)
 // Pins for Arduino <-> shield communication
 const int RX_PIN = 2;
@@ -115,6 +115,9 @@ void setup() {
   // If reached here, are now connected to the network
   Serial.println("You are connected to the network: ");
   printWiFiStatus();
+
+  // Always POST once at the start (to give server the initial status)
+  postData(SERVER_URL, SERVER_PORT, formatData(REST_ID, TABLE_ID, isTaken));
 }
 
 void loop() {  
@@ -162,11 +165,6 @@ void loop() {
         // Serial.println("Out of range (on this face)!");
         // Serial.println(approxDistMeter);
       } else {
-        // Serial.print("Return time (microseconds): ");
-        // Serial.println(returnTimeMicro);
-        // Serial.print("Distance computed (meters): ");
-        // Serial.println(approxDistMeter);
-
         // Take note that an object was found during the scan cycle
         if (!isFound){
           isFound = true;
@@ -233,7 +231,7 @@ void postData(char *server_url, int server_port, String dataString) {
       Serial.println("[postData] Connected to server!");
 
       /* Send the HTTP POST. */
-      String postString = getPostString("/", String(server_url) + ":" + String(server_port), dataString);
+      String postString = getPostString("/sensordata", String(server_url) + ":" + String(server_port), dataString);
       client.print(postString);
 
       Serial.println("[postData] Sent my message to server.");
