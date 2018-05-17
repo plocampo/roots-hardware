@@ -20,8 +20,8 @@
 
 /* Constants */
 /* Arduino-specific */
-const int REST_ID = 1234;
-const int TABLE_ID = 69;
+const int REST_ID = 145;
+const int TABLE_ID = 1;
 
 /* Pins for the servo motor (and some servo-motor-specific constants): */
 const int SERVO_PIN = 9;                        // (Chosen b/c Servo.h autoreserves this pin and pin 10 for the servo)
@@ -30,17 +30,17 @@ const int POSITIONS[] = {15, 30, 15, 0};        // In degrees; list of "position
 const int TURN_MILLI = 15;                      // In milliseconds; time needed for the servo motor to change positions
 
 /* Pins for the ultrasonic sensor (and some sensor-specific constants): */
-const int ECHO_PINS[] = {13, 11, 6, 4};         // List of "output" pins of all ultrasonic sensors
-const int TRIG_PINS[] = {12, 8, 5, 3};          // Trigger/switch/input pin for ultrasonic sensor
+const int ECHO_PINS[] = {13, 11, 6, A0}; //{13, 11, 6, A5};         // List of "output" pins of all ultrasonic sensors
+const int TRIG_PINS[] = {12, 8, 5, A1};  //{12, 8, 5, A4};          // Trigger/switch/input pin for ultrasonic sensor
 
 const float CLEAR_MICRO = 2;                    // In microseconds; time needed to clear pin before resending sound pulse
 const float TRIGGER_MICRO = 10;                 // In microseconds; time needed for trigger pin to be on HIGH to get accurate readings
 
 /* Constants for WiFi communication */
-const char NETWORK_SSID[] = "replace-with-ssid";   // Network SSID the Arduino should connect to
-const char NETWORK_PASS[] = "replace-with-pass";       // Password of above network
+const char NETWORK_SSID[] = "insert-SSID-here";   // Network SSID the Arduino should connect to
+const char NETWORK_PASS[] = "insert-pass-here";       // Password of above network
 
-const char SERVER_URL[] = "192.168.8.102";         // URL/ip address of server/website to connect to
+const char SERVER_URL[] = "192.168.43.148";         // URL/ip address of server/website to connect to
 const int SERVER_PORT = 8000;                   // Port of server to connect to
 
 /* Other constants: */
@@ -170,6 +170,7 @@ void loop() {
           isFound = true;
         }
       }
+      //aSerial.println("~~~ Echo pin " + String(currEchoPin) + ", Trig pin " + String(currTrigPin) + ", reading is " + String(approxDistMeter));
     }
     delay(SCAN_MILLI);    // Wait before next turn
   }
